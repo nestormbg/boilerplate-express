@@ -1,6 +1,10 @@
 let express = require('express');
 let app = express();
-require('dotenv').config()
+
+app.use((req, res, next) => {
+  console.log(`${req.method} ${re.path} - ${req.ip}`);
+  next();
+});
 
 app.get('/', (req, res) => {
   res.sendFile(__dirname + '/views/index.html');
