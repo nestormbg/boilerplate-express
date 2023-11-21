@@ -19,7 +19,7 @@ app.route('/name').get((req, res) => {
   });
 }).post((req, res) => {
   let {first: firstName, last: lastName} = req.query;
-  console.log(req.body);
+  console.log(bodyParser.json(req.body));
   res.json({
     name: `${firstName} ${lastName}`
   });
