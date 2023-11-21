@@ -4,20 +4,27 @@ let bodyParser = require('body-parser');
 
 
 app.use(bodyParser.urlencoded({extended: false}));
-app.use(bodyParser.json());
-
+app.use(bodyParser.json())
 
 app.use((req, res, next) => {
   console.log(`${req.method} ${req.path} - ${req.ip}`);
   next();
 });
-//app.route(path).get(handler).post(handler)
-app.get('/name', (req, res) => {
+
+
+app.route('/name').get((req, res) => {
   let {first: firstName, last: lastName} = req.query;
   res.json({
     name: `${firstName} ${lastName}`
   });
+}).post((req, res) => {
+  let {first: firstName, last: lastName} = req.query;
+  console.log(req.body);
+  res.json({
+    name: `${firstName} ${lastName}`
+  });
 });
+
 
 app.get('/:word/echo', (req, res) => {
   res.json({echo: req.params.word});
